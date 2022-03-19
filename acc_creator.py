@@ -14,18 +14,20 @@
 
 import csv
 import time
+from datetime import datetime
 
 import pyautogui
 
 from modules.captcha_warning import captcha_warning
 from modules.chrome_jobs import ChromeController
+from modules.telegram_jobs import TelegramController
 from modules.user_model import MyUser
 from ultis.mouse_keyboard_automation import keyboard_type_job
 
 # import acc_creator_scripts.csv_reader
 
 userList = []
-with open("user_db.csv", 'r') as file:
+with open("C://Users//nxngu//Dropbox//AirdropProjects//user_db.csv", 'r') as file:
     csvreader = csv.reader(file)
     header = next(csvreader)
     for row in csvreader:
@@ -37,7 +39,7 @@ with open("user_db.csv", 'r') as file:
 #         print(myUser.calculate_age())
 
 
-def createDiscord(user):
+def createDiscordAcc(user):
 
     chromeCtrl = ChromeController(user)
     chromeCtrl.chrome_open()
@@ -46,7 +48,6 @@ def createDiscord(user):
     # pyautogui.click(212, 671)
 
 
-    pyautogui.click(1229, 578)
     time.sleep(1)
     keyboard_type_job(user.mail)
     pyautogui.press('tab')
@@ -67,7 +68,7 @@ def createDiscord(user):
 
 
 
-def createGmail(user):
+def createGmailAcc(user):
     chromeCtrl = ChromeController(user)
     chromeCtrl.chrome_open()
     chromeCtrl.go_to_url('https://www.google.com/intl/en/gmail/about/#')
@@ -127,77 +128,31 @@ def createGmail(user):
 
 
 
-
-#===========================================================
-def initTelegramAccount(user):
-    chromeCtrl = ChromeController(user)
-    chromeCtrl.chrome_open()
-
-    chromeCtrl.go_to_web_tele()
-
-    print('User ' + str(user.phoneNumber) + ' ====================================')
-    time.sleep(8)
-
-    pyautogui.click(1448, 1322)
-    time.sleep(2)
-
-    pyautogui.click(1416, 1256)
-
-    keyboard_type_job(user.phoneNumber[1:])
-
-
-    pyautogui.click(1418, 1586)
-    captcha_warning()
-
-    pyautogui.click(221, 219)
-
+#===============================================
+def logoutTelegramOnBlueStack():
+    pyautogui.click(203, 364)
     time.sleep(1)
-    pyautogui.click(303, 305)
-
+    pyautogui.click(372, 1102)
     time.sleep(1)
-
-    pyautogui.click(1472, 1697)
-
-
-    keyboard_type_job('https://t.me/joinchat/mAWmlIfVB59hOGY1')
-
-    pyautogui.click(2334, 1738)
+    pyautogui.click(1837, 515)
     time.sleep(1)
-
-    pyautogui.click(1957, 1600)
-    time.sleep(2)
-
-    pyautogui.click(1688, 1033)
+    pyautogui.click(1670, 713)
     time.sleep(1)
-    #=============================================
-    pyautogui.rightClick(237, 474)
-
+    pyautogui.click(1077, 1378)
     time.sleep(1)
-
-    pyautogui.click(382, 777)
-
+    pyautogui.click(1799, 1158)
     time.sleep(1)
-    #=============================================
-
-    pyautogui.rightClick(237, 474)
-
-    time.sleep(1)
-
-    pyautogui.click(382, 777)
-
-    time.sleep(1)
-
-    chromeCtrl.chrome_close()
+    pyautogui.click(1414, 1340)
 
 
 #===============================================
 
 def createTelegramOnBlueStack(user):
-    # pyautogui.click(1034, 777)
-    # keyboard_type_job('84')
-    # keyboard_type_job(user.phoneNumber)
-    # pyautogui.press('enter')
-    # captcha_warning()
+    pyautogui.click(1034, 777)
+    keyboard_type_job('84')
+    keyboard_type_job(user.phoneNumber)
+    pyautogui.press('enter')
+    captcha_warning()
 
 
 
@@ -218,12 +173,181 @@ def createTelegramOnBlueStack(user):
     # pyautogui.click(1611, 1214)
 
 
-theUser = userList[1]
-pyautogui.click(197, 65)
+def createTwitterAcc(user):
+    chromeCtrl = ChromeController(user)
+    chromeCtrl.chrome_open()
 
-captcha_warning()
+    chromeCtrl.go_to_url('https://twitter.com')
 
+    captcha_warning()
+
+    pyautogui.click(1836, 1053)
+    time.sleep(3)
+    pyautogui.click(1507, 862)
+    time.sleep(1)
+
+    pyautogui.click(1723, 1132)
+
+    time.sleep(2)
+
+
+    month = user.birthDate.month
+    for i in range(month):
+        pyautogui.press('down')
+    pyautogui.press('tab')
+    day = user.birthDate.day
+    for i in range(day):
+        pyautogui.press('down')
+    pyautogui.press('tab')
+    for i in range(datetime.now().year + 1 - user.birthDate.year):
+        pyautogui.press('down')
+
+    time.sleep(2)
+    pyautogui.click(1501, 1519)
+    time.sleep(1)
+    pyautogui.click(1501, 1519)
+    time.sleep(3)
+    pyautogui.click(1501, 1519)
+
+    time.sleep(2)
+
+    pyautogui.click(1400, 1279)
+
+    time.sleep(1)
+
+    pyautogui.click(1427, 984)
+    time.sleep(1)
+    pyautogui.click(1903, 1491)
+
+    time.sleep(1)
+
+    pyautogui.click(1501, 1519)
+    time.sleep(1)
+
+    pyautogui.click(1501, 1519)
+
+def openGmail(user):
+    chromeCtrl = ChromeController(user)
+    chromeCtrl.chrome_open()
+    chromeCtrl.go_to_gmail()
+
+def createFbAcc(user):
+
+    chromeCtrl = ChromeController(user)
+    chromeCtrl.chrome_open()
+    chromeCtrl.go_to_fb()
+
+    pyautogui.click(2004, 1000)
+    time.sleep(1)
+
+    firstName = user.name.split(' ')[0]
+    lastName = user.name.split(' ')[1]
+
+    keyboard_type_job(firstName)
+    time.sleep(1)
+
+    pyautogui.press('tab')
+
+    keyboard_type_job(lastName)
+    pyautogui.press('tab')
+
+    keyboard_type_job(user.mail)
+    pyautogui.press('tab')
+    keyboard_type_job(user.mail)
+    pyautogui.press('tab')
+    keyboard_type_job(user.mailPass)
+    pyautogui.press('tab')
+    pyautogui.press('tab')
+    keyboard_type_job(user.birthDate.day)
+
+    pyautogui.press('tab')
+
+    for i in range(12):
+        pyautogui.press('up')
+
+    month = user.birthDate.month
+    for i in range(month - 1):
+        pyautogui.press('down')
+
+    pyautogui.press('tab')
+    for i in range(datetime.now().year - user.birthDate.year):
+        pyautogui.press('down')
+    pyautogui.press('tab')
+    pyautogui.press('tab')
+
+    pyautogui.press('down')
+    pyautogui.press('up')
+
+
+
+
+
+def initTelegram(user):
+    teleCtrl = TelegramController(user)
+    teleCtrl.telegram_open()
+
+    pyautogui.click(1442, 1123)
+    time.sleep(1)
+    pyautogui.click(1430, 1267)
+    time.sleep(1)
+    pyautogui.typewrite(["backspace"])
+    pyautogui.typewrite(["backspace"])
+
+    keyboard_type_job(84)
+    keyboard_type_job(user.phoneNumber)
+    pyautogui.typewrite(["enter"])
+    captcha_warning()
+
+    pyautogui.click(203, 97)
+    time.sleep(1)
+    pyautogui.click(627, 112)
+    time.sleep(1)
+
+    keyboard_type_job('https://t.me/joinchat/mAWmlIfVB59hOGY1')
+    pyautogui.typewrite(["enter"])
+    time.sleep(1)
+    pyautogui.click(1639, 1676)
+    time.sleep(1)
+    pyautogui.click(1671, 1187)
+
+    time.sleep(1)
+
+    pyautogui.rightClick(646, 337)
+    time.sleep(1)
+    pyautogui.click(543, 412)
+    time.sleep(1)
+    pyautogui.rightClick(522, 337)
+    time.sleep(1)
+    pyautogui.click(681, 437)
+    time.sleep(1)
+
+    time.sleep(1)
+
+    pyautogui.click(194, 98)
+    time.sleep(1)
+    pyautogui.click(359, 635)
+    time.sleep(1)
+    pyautogui.click(1300, 519)
+    time.sleep(1)
+    pyautogui.click(1329, 895)
+    time.sleep(1)
+
+    keyboard_type_job(user.teleUsername)
+    pyautogui.typewrite(["enter"])
+
+
+theUser = MyUser()
+theUser = userList[9]
+pyautogui.click(216, 145)
+
+# logoutTelegramOnBlueStack()
 # createTelegramOnBlueStack(theUser)
-# initTelegramAccount(theUser)
-# createGmail(theUser)
-# createDiscord(theUser)
+# initTelegram(theUser)
+# createGmailAcc(theUser)
+# createDiscordAcc(theUser)
+# openGmail(theUser)
+# createTwitterAcc(theUser)
+# createFbAcc(theUser)
+
+
+

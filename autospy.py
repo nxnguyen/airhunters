@@ -1,3 +1,4 @@
+import pyperclip
 from pynput.mouse import Button, Listener
 
 print('AUTOSPY running')
@@ -15,6 +16,7 @@ def on_click(x, y, button, pressed):
             print('\n')
             # print('#========================================\n')
             print('pyautogui.click({0}, {1})\n'.format(x, y))
+            pyperclip.copy('pyautogui.click({0}, {1})\n'.format(x, y))
     pass
 
 
